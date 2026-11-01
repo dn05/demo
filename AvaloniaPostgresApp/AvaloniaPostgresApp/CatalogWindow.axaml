@@ -1,0 +1,50 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:models="clr-namespace:AvaloniaPostgresApp.Models"
+        x:Class="AvaloniaPostgresApp.CatalogWindow"
+        Title="Каталог товаров" Width="900" Height="700">
+
+    <Grid RowDefinitions="Auto, *" Margin="20">
+        
+        <!-- Панель поиска и сортировки -->
+        <Grid x:Name="FilterPanel" Grid.Row="0" ColumnDefinitions="*, Auto, Auto" ColumnSpacing="10" Margin="0,0,0,20">
+            <TextBox x:Name="SearchBox" Grid.Column="0" Watermark="Введите для поиска" TextChanged="OnSearchTextChanged" />
+            <ComboBox x:Name="SortCombo" Grid.Column="1" PlaceholderText="Сортировка" MinWidth="120" SelectionChanged="OnSortChanged">
+                <ComboBoxItem Content="По возрастанию цены" />
+                <ComboBoxItem Content="По убыванию цены" />
+            </ComboBox>
+            <ComboBox Grid.Column="2" PlaceholderText="Фильтрация" MinWidth="120" />
+        </Grid>
+
+        <!-- Список товаров -->
+        <ListBox Grid.Row="1" x:Name="ProductList">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type models:Product}">
+                    <Grid ColumnDefinitions="Auto, *" Margin="8">
+                        
+                        <!-- Заглушка вместо фото -->
+                        <Border Grid.Column="0" Width="80" Height="80" Background="#E0E0E0" CornerRadius="4">
+                            <TextBlock Text="Фото" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" />
+                        </Border>
+                        
+                        <!-- Информация -->
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center" Spacing="4">
+                            <TextBlock Text="{Binding ProductName.ProductName1}" FontWeight="SemiBold" FontSize="16" />
+                            <TextBlock Text="{Binding Article, StringFormat='Артикул: {0}'}" Foreground="Gray" FontSize="12" />
+                            
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <TextBlock Text="{Binding Price, StringFormat='{}{0} руб.'}" Foreground="Green" FontWeight="Bold" />
+                                <TextBlock Text="{Binding Unit}" Foreground="Gray" FontSize="12" />
+                            </StackPanel>
+                            
+                            <StackPanel Orientation="Horizontal" Spacing="15">
+                                <TextBlock Text="{Binding Manufacturer.ManufacturerName, StringFormat='Производитель: {0}', TargetNullValue='—'}" Foreground="Gray" FontSize="12" />
+                                <TextBlock Text="{Binding Supplier.SupplierName, StringFormat='Поставщик: {0}', TargetNullValue='—'}" Foreground="Gray" FontSize="12" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>

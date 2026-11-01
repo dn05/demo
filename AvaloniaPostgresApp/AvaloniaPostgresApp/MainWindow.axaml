@@ -1,0 +1,18 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="AvaloniaPostgresApp.MainWindow"
+        Title="Авторизация" Width="350" Height="300">
+
+    <StackPanel Margin="20" Spacing="10">
+        <TextBlock Text="Вход в систему" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+
+        <TextBox x:Name="LoginBox" PlaceholderText="Введите логин" TextChanged="OnLoginTextChanged" />
+        <TextBox x:Name="PasswordBox" PlaceholderText="Введите пароль" PasswordChar="•" TextChanged="OnPasswordTextChanged" />
+
+        <Button Content="Войти" HorizontalAlignment="Stretch" Click="OnLoginClick" />
+        <Button Content="Продолжить как гость" HorizontalAlignment="Stretch" Click="OnGuestClick" />
+
+        <!-- Сюда выводятся сообщения об успехе или ошибке -->
+        <TextBlock x:Name="MessageText" FontSize="14" FontWeight="Bold" TextWrapping="Wrap" Margin="0,10,0,0" HorizontalAlignment="Center"/>
+    </StackPanel>
+</Window>
